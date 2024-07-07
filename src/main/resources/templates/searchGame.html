@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments :: headContent}"></div>
+    <style>
+        .search-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .game-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .game-item p {
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .btn-add {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="container search-container">
+        <h2 class="text-center mb-4">Search Games</h2>
+        <div class="mb-3">
+            <form method="post" th:action="@{searchGame}">
+                <input type="hidden" th:name="listType" th:value="${listType}">
+                <input type="text" class="form-control" id="searchInput" name="name" placeholder="Search for a game">
+                <button class = "btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div id="gameList">
+            <div class="game-item" th:each="game : ${foundGames}">
+                <img th:src="${game.iconPath}" alt="Game">
+                <p th:text="${game.name}"></p>
+                <form method="post" th:action="@{/addUserGame}">
+                    <input type="hidden" name="gameId" th:value="${game.id}">
+                    <input type="hidden" name="listType" th:value="${listType}">
+                    <button type="submit" class="btn btn-success btn-add">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

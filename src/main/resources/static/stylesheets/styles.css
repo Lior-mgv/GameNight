@@ -1,0 +1,59 @@
+.event-card {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-card img {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 200px;
+    background-color: #007bff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+}
+.sidebar a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+.sidebar a:hover {
+    background-color: #0056b3;
+}
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+.main-content {
+    margin-left: 220px;
+    padding: 40px 20px 20px;
+}
+.game-item, .user-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.game-item img, .user-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}

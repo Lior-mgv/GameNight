@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments :: headContent}" th:remove="tag"></div>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 40px 20px 20px;
+        }
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="col">
+        <div class="main-content">
+            <h2>Your events</h2>
+            <div class="filter-group">
+                <form method="get" th:action="@{/yourEvents}">
+                    <div class="checkbox-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="all">
+                            <label class="form-check-label" for="all">All Events</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:value="true" id="hosted" th:name="hostedOnly">
+                            <label class="form-check-label" for="hosted">Hosted Events</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:value="true" id="attended" th:name="attendedOnly">
+                            <label class="form-check-label" for="attended">Attended Events</label>
+                        </div>
+                    </div>
+                    <div th:replace="~{fragments :: filters (${filters}, ${languages})}"></div>
+                    <div class="col-md-2">
+                        <div th:replace="~{fragments :: sorting}"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Apply</button>
+                </form>
+            </div>
+
+            <h3 th:text="|Upcoming events (${#lists.size(upcoming)}):|"></h3>
+            <div th:each="event : ${upcoming}">
+                <div th:replace="~{fragments :: eventCard (${event})}"></div>
+            </div>
+            <h3 th:text="|Passed events (${#lists.size(passed)}):|"></h3>
+            <div th:each="event : ${passed}">
+                <div th:replace="~{fragments :: eventCard (${event})}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-whHJry+H8/JcYY8tpD+CKTLT8FQoeQThy6R8iYFFDYja/jXbkF5X+KR3lO3f8/+E"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments :: headContent}" th:remove="tag"></div>
+    <style>
+        /* Custom styles */
+        .event-details div {
+            margin-bottom: 15px;
+        }
+        .game-item {
+            margin-bottom: 10px;
+        }
+        .game-item .votes button {
+            margin-left: 10px;
+        }
+        .game-item img, .user-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 40px 20px 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="row">
+        <div class="col">
+            <div class="main-content">
+                <div class="event-details row">
+                    <div class="col-sm-6">
+                        <h3>Place</h3>
+                        <p th:text="${event.venue.name}"></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Date and time</h3>
+                        <p th:text="${event.dateTime}"></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Language</h3>
+                        <p th:text="${event.language}"></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Description</h3>
+                        <p th:text="${event.description}"></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Number of people</h3>
+                        <span th:if="${event.maxParticipants != null}" th:text="|${event.numOfPeople} of ${event.maxParticipants}|">Number of people</span>
+                        <span th:if="${event.maxParticipants == null}" th:text="${event.numOfPeople}">Number of people</span>
+                    </div>
+                    <div class="row">
+                        <div class="col"><h3>Games:</h3>
+                            <div class="game-item" th:each="game : ${event.games}">
+                                <img th:src="${game.iconPath}" alt="Game">
+                                <p th:text="${game.name}"></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h3>Attendants:</h3>
+                            <div class="user-item" th:each="attendant: ${event.attendants}">
+                                <img th:src="${attendant.profilePicPath}" alt="User">
+                                <p th:text="${attendant.username}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

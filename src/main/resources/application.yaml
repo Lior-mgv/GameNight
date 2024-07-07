@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: "GameNight"
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=game_night;
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: 123
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
